@@ -4,6 +4,7 @@ Fecha: 14/08/2017
 Autor: A01374356 Garcia Roque Javier Antonio
 *****************************/
 #include <iostream>
+#include "InputFile.h"
 int PerimetroRectangulo(int, int);
 float AreaTriangulo(float, float);
 int Mayor(int, int, int);
@@ -31,6 +32,14 @@ int main() {
 	Fibonacci(9);
 	bool primo = EsPrimo(52);
 	std::cout << primo << std::endl;
+
+
+	std::string filename = "Prueba.txt";
+	InputFile myFile;
+	myFile.Read(filename);
+	std::string contents = myFile.GetContents();
+	std::cout << "Contens: " << contents << std::endl;
+
 	std::cin.get();
 	return 0;
 }
