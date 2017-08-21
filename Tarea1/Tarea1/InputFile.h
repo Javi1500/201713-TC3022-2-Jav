@@ -4,7 +4,6 @@
 class InputFile {
 public:
 	bool Read(std::string fileName);
-
 	std::string GetContents();
 
 private:

@@ -39,7 +39,6 @@ int main() {
 	myFile.Read(filename);
 	std::string contents = myFile.GetContents();
 	std::cout << "Contens: " << contents << std::endl;
-
 	std::cin.get();
 	return 0;
 }
