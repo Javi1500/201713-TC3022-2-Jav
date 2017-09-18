@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\DELL\Desktop\Semestre 7\Graficas com\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\DELL\Desktop\Semestre 7\Graficas com\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Javier Garcia\Desktop\Semestre 7\javi\Graficas com\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Javier Garcia\Desktop\Semestre 7\javi\Graficas com\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -136,6 +136,8 @@
   <ItemGroup>
     <None Include="Default.frag" />
     <None Include="Default.vert" />
+    <None Include="DiscardCenter.frag" />
+    <None Include="DiscardCenter.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

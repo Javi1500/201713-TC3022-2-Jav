@@ -17,140 +17,140 @@ void Fibonacci(int);
 bool EsPrimo(int);
 
 int main() {
-	int x = PerimetroRectangulo(5, 3);
-	std::cout << x << std::endl;
-	float y = AreaTriangulo(5.0f, 3.0f);
-	std::cout << y << std::endl;
-	int mayor = Mayor(5, 9, 1);
-	std::cout << mayor << std::endl;
-	int menor = Menor(5, 9, 1);
-	std::cout << menor << std::endl;
-	FilaEstrellas(5);
-	MatrizEstrellas(4);
-	PiramideEstrellas(6);
-	FlechaEstrellas(3);
-	Fibonacci(9);
-	bool primo = EsPrimo(52);
-	std::cout << primo << std::endl;
+int x = PerimetroRectangulo(5, 3);
+std::cout << x << std::endl;
+float y = AreaTriangulo(5.0f, 3.0f);
+std::cout << y << std::endl;
+int mayor = Mayor(5, 9, 1);
+std::cout << mayor << std::endl;
+int menor = Menor(5, 9, 1);
+std::cout << menor << std::endl;
+FilaEstrellas(5);
+MatrizEstrellas(4);
+PiramideEstrellas(6);
+FlechaEstrellas(3);
+Fibonacci(9);
+bool primo = EsPrimo(52);
+std::cout << primo << std::endl;
 
 
-	std::string filename = "Prueba.txt";
-	InputFile myFile;
-	myFile.Read(filename);
-	std::string contents = myFile.GetContents();
-	std::cout << "Contens: " << contents << std::endl;
-	std::cin.get();
-	return 0;
+std::string filename = "Prueba.txt";
+InputFile myFile;
+myFile.Read(filename);
+std::string contents = myFile.GetContents();
+std::cout << "Contens: " << contents << std::endl;
+std::cin.get();
+return 0;
 }
 
 int PerimetroRectangulo(int base, int altura) {
-	return (base * 2) + (altura * 2);
+return (base * 2) + (altura * 2);
 }
 
 float AreaTriangulo(float base, float altura) {
-	return (base*altura) / 2;
+return (base*altura) / 2;
 }
 
 int Mayor(int numero1, int numero2, int numero3) {
-	if (numero1 >= numero2 && numero1 >= numero3) {
-		return numero1;
-	}
-	if (numero2 >= numero1 && numero2 >= numero3) {
-		return numero2;
-	}
-	if (numero3 >= numero2 && numero3 >= numero1) {
-		return numero3;
-	}
+if (numero1 >= numero2 && numero1 >= numero3) {
+return numero1;
+}
+if (numero2 >= numero1 && numero2 >= numero3) {
+return numero2;
+}
+if (numero3 >= numero2 && numero3 >= numero1) {
+return numero3;
+}
 }
 
 int Menor(int numero1, int numero2, int numero3) {
-	if (numero1 <= numero2 && numero1 <= numero3) {
-		return numero1;
-	}
-	if (numero2 <= numero1 && numero2 <= numero3) {
-		return numero2;
-	}
-	if (numero3 <= numero2 && numero3 <= numero1) {
-		return numero3;
-	}
+if (numero1 <= numero2 && numero1 <= numero3) {
+return numero1;
+}
+if (numero2 <= numero1 && numero2 <= numero3) {
+return numero2;
+}
+if (numero3 <= numero2 && numero3 <= numero1) {
+return numero3;
+}
 }
 
 void FilaEstrellas(int n) {
-	for (int i = 0; i<n; i++) {
-		std::cout << "*";
-	}
-	std::cout << "" << std::endl;
+for (int i = 0; i<n; i++) {
+std::cout << "*";
+}
+std::cout << "" << std::endl;
 }
 
 void MatrizEstrellas(int n) {
-	int cont = 0;
-	while (cont<n) {
-		for (int i = 0; i<n; i++) {
-			std::cout << "*";
-		}
-		std::cout << "" << std::endl;
-		cont++;
-	}
+int cont = 0;
+while (cont<n) {
+for (int i = 0; i<n; i++) {
+std::cout << "*";
+}
+std::cout << "" << std::endl;
+cont++;
+}
 }
 
 void PiramideEstrellas(int n) {
-	int cont = n - 1;
-	while (cont >= 0) {
-		for (int i = 0; i<n - cont; i++) {
-			std::cout << "*";
-		}
-		std::cout << "" << std::endl;
-		cont--;
-	}
+int cont = n - 1;
+while (cont >= 0) {
+for (int i = 0; i<n - cont; i++) {
+std::cout << "*";
+}
+std::cout << "" << std::endl;
+cont--;
+}
 }
 
 void FlechaEstrellas(int n) {
-	int cont = n - 1;
-	while (cont >= 0) {
-		for (int i = 0; i<n - cont; i++) {
-			std::cout << "*";
-		}
-		std::cout << "" << std::endl;
-		cont--;
-	}
-	cont = n - 1;
-	while (cont>0) {
-		for (int i = n - 1; i>0; i -= 1) {
-			std::cout << "*";
-		}
-		std::cout << "" << std::endl;
-		n--;
-		cont--;
-	}
+int cont = n - 1;
+while (cont >= 0) {
+for (int i = 0; i<n - cont; i++) {
+std::cout << "*";
+}
+std::cout << "" << std::endl;
+cont--;
+}
+cont = n - 1;
+while (cont>0) {
+for (int i = n - 1; i>0; i -= 1) {
+std::cout << "*";
+}
+std::cout << "" << std::endl;
+n--;
+cont--;
+}
 }
 
 void Fibonacci(int n) {
-	int cont = 1;
-	int a = 0;
-	int b;
-	for (int i = 0; i <= n; i++) {
-		std::cout << cont;
-		b = cont;
-		cont = cont + a;
-		a = b;
-	}
-	std::cout << "" << std::endl;
+int cont = 1;
+int a = 0;
+int b;
+for (int i = 0; i <= n; i++) {
+std::cout << cont;
+b = cont;
+cont = cont + a;
+a = b;
+}
+std::cout << "" << std::endl;
 }
 
 bool EsPrimo(int numero) {
-	int aux = 0;
-	for (int i = 1; i <= numero; i++) {
-		if (numero%i == 0) {
-			aux++;
-			/*comprobar cuanto da el aux std::cout<<aux;*/
-	/*	}
-	}
-	if (aux>2) {
-		return false;
-	}
-	else {
-		return true;
-	}
+int aux = 0;
+for (int i = 1; i <= numero; i++) {
+if (numero%i == 0) {
+aux++;
+/*comprobar cuanto da el aux std::cout<<aux;*/
+/*	}
+}
+if (aux>2) {
+return false;
+}
+else {
+return true;
+}
 }*/
 
 #include <iostream>
@@ -174,21 +174,93 @@ void Initialize() {
 	//Esta es una lista de vec2
 	//Esto es en el CPU
 	std::vector<glm::vec2> positions;
-	positions.push_back(glm::vec2(-0.3f, -0.3f));
-	positions.push_back(glm::vec2(0.3f, -0.30f));
-	positions.push_back(glm::vec2(-0.3f, 0.3f));
-	positions.push_back(glm::vec2(0.3f, 0.3f));
+	positions.push_back(glm::vec2(-0.3f, -0.4f));
+	positions.push_back(glm::vec2(-0.6f, -0.8f));
+	positions.push_back(glm::vec2(0.6f, -0.8f));
+	positions.push_back(glm::vec2(-0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.6f, -0.8f));
+	positions.push_back(glm::vec2(0.9f, 0.3f));
+	positions.push_back(glm::vec2(0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.44f, 0.18f));
+	positions.push_back(glm::vec2(0.9f, 0.3f));
+	positions.push_back(glm::vec2(0.0f, 1.0f));
+	positions.push_back(glm::vec2(0.44f, 0.18f));
+	positions.push_back(glm::vec2(0.0f, 0.5f));
+	positions.push_back(glm::vec2(0.0f, 1.0f));
+	positions.push_back(glm::vec2(-0.9f, 0.3f));
+	positions.push_back(glm::vec2(0.0f, 0.5f));
+	positions.push_back(glm::vec2(-0.44f, 0.18f));
+	positions.push_back(glm::vec2(-0.9f, 0.3f));
+	positions.push_back(glm::vec2(-0.6f, -0.8f));
+	positions.push_back(glm::vec2(-0.3f, -0.4f));
+	positions.push_back(glm::vec2(-0.44f, 0.18f));
+
+	/*positions.push_back(glm::vec2(0.0f, 0.5f));
+	positions.push_back(glm::vec2(-0.465f, 0.18f));
+	positions.push_back(glm::vec2(-0.0f, 0.18f));
+	positions.push_back(glm::vec2(0.0f, 0.5f));
+	positions.push_back(glm::vec2(0.465f, 0.18f));
+	positions.push_back(glm::vec2(0.0f, 0.18f));
+	positions.push_back(glm::vec2(0.3f, -0.4f));
+	positions.push_back(glm::vec2(-0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.0f, 0.18f));
+	positions.push_back(glm::vec2(0.465f, 0.18f));
+	positions.push_back(glm::vec2(0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.0f, 0.18f));
+	positions.push_back(glm::vec2(-0.465f, 0.18f));
+	positions.push_back(glm::vec2(-0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.0f, 0.18f));*/
+
+	/*positions.push_back(glm::vec2(0.3f, 0.3f));
 	positions.push_back(glm::vec2(-0.3f, 0.30f));
-	positions.push_back(glm::vec2(0.3f, -0.3f));
+	positions.push_back(glm::vec2(0.3f, -0.3f));*/
+
 
 	//se crea la lista y se le da Nombre de la lista 
 	std::vector<glm::vec3> color;
-	color.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
-	color.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
+
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f)); 
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+
+	/*color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
 	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
-	color.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
 	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));*/
+
+	/*color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));*/
 
 	//Queremos geenerar un manager 
 	glGenVertexArrays(1, &vao);
@@ -211,14 +283,14 @@ void Initialize() {
 	GLuint colorsVBO;
 	glGenBuffers(1, &colorsVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, colorsVBO);//Inicializamos el buffer con el atributo color
-	//Madamos los datos a la tarjeta de video
+											 //Madamos los datos a la tarjeta de video
 	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*color.size(), color.data(), GL_STATIC_DRAW);
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glBindBuffer(GL_ARRAY_BUFFER, 0); //Le decimos que ya no quiero utilizarlo
 
 
-	//Desactivamos el manager
+									  //Desactivamos el manager
 	glBindVertexArray(0);
 
 	//Creamos un objeto para leer archivos de texto
@@ -272,8 +344,8 @@ void GameLoop() {
 	//Activamos el manager y en este momento se activan todos los VBO´s asociados automaticamente
 	glBindVertexArray(vao);
 	//Funcion de dibujo sin indices 
-	glDrawArrays(GL_TRIANGLES, 0, 6);//Aqui dice que solo se dibujan 3 vertices
-	//Terminamos de usar el manager
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 21);//Aqui dice que solo se dibujan 3 vertices
+										  //Terminamos de usar el manager
 	glBindVertexArray(0);
 
 	//Desactivamos el manager
@@ -309,7 +381,7 @@ int main(int argc, char* argv[]) {
 	//En donde podemos dibujar
 	glutInit(&argc, argv);
 	//Iniciar la versión especifica de openGL
-	glutInitContextVersion(4,4);
+	//glutInitContextVersion(4,4);
 	//Iniciar el contexto de openGL. El contesto se refiere a las capacidades que tendra nuestra aplicacion grafica 
 	//En este caso estamos trabajando con el pipeline clasico
 	glutInitContextProfile(GLUT_CORE_PROFILE); //Abres la ventana para que sea compatible con el viejito gl
@@ -332,7 +404,7 @@ int main(int argc, char* argv[]) {
 
 	//Configurar OpenGL.}
 	//Este es el color por default en el framebuffer (amarillo).
-	glClearColor(.7f, 1.0f, 0.5f, 1.0f);
+	glClearColor(.0f, 1.0f, 0.0f, 0.0f);
 
 	std::cout << glGetString(GL_VERSION) << std::endl;
 

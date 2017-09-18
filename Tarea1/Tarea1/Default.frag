@@ -1,4 +1,4 @@
-#version 210 
+#version 400
 
 in vec3 InterpolatedColor;
 
