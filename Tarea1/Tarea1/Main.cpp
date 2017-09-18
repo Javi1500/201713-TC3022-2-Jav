@@ -174,29 +174,19 @@ void Initialize() {
 	//Esta es una lista de vec2
 	//Esto es en el CPU
 	std::vector<glm::vec2> positions;
-	positions.push_back(glm::vec2(-0.3f, -0.4f));
-	positions.push_back(glm::vec2(-0.6f, -0.8f));
-	positions.push_back(glm::vec2(0.6f, -0.8f));
-	positions.push_back(glm::vec2(-0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.6f, -0.8f));
-	positions.push_back(glm::vec2(0.9f, 0.3f));
-	positions.push_back(glm::vec2(0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.44f, 0.18f));
-	positions.push_back(glm::vec2(0.9f, 0.3f));
-	positions.push_back(glm::vec2(0.0f, 1.0f));
-	positions.push_back(glm::vec2(0.44f, 0.18f));
-	positions.push_back(glm::vec2(0.0f, 0.5f));
-	positions.push_back(glm::vec2(0.0f, 1.0f));
-	positions.push_back(glm::vec2(-0.9f, 0.3f));
-	positions.push_back(glm::vec2(0.0f, 0.5f));
-	positions.push_back(glm::vec2(-0.44f, 0.18f));
-	positions.push_back(glm::vec2(-0.9f, 0.3f));
 	positions.push_back(glm::vec2(-0.6f, -0.8f));
 	positions.push_back(glm::vec2(-0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.6f, -0.8f));
+	positions.push_back(glm::vec2(0.3f, -0.4f));
+	positions.push_back(glm::vec2(0.9f, 0.3f));
+	positions.push_back(glm::vec2(0.44f, 0.18f));
+	positions.push_back(glm::vec2(0.0f, 1.0f));
+	positions.push_back(glm::vec2(0.0f, 0.5f));
+	positions.push_back(glm::vec2(-0.9f, 0.3f));
 	positions.push_back(glm::vec2(-0.44f, 0.18f));
+	positions.push_back(glm::vec2(-0.6f, -0.8f));
+	positions.push_back(glm::vec2(-0.3f, -0.4f));
 
-	//Hola 
 
 	/*positions.push_back(glm::vec2(0.0f, 0.5f));
 	positions.push_back(glm::vec2(-0.465f, 0.18f));
@@ -226,20 +216,12 @@ void Initialize() {
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 0.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f)); 
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -346,7 +328,7 @@ void GameLoop() {
 	//Activamos el manager y en este momento se activan todos los VBO´s asociados automaticamente
 	glBindVertexArray(vao);
 	//Funcion de dibujo sin indices 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 21);//Aqui dice que solo se dibujan 3 vertices
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 12);//Aqui dice que solo se dibujan 3 vertices
 										  //Terminamos de usar el manager
 	glBindVertexArray(0);
 
