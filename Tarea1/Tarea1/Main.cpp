@@ -196,6 +196,8 @@ void Initialize() {
 	positions.push_back(glm::vec2(-0.3f, -0.4f));
 	positions.push_back(glm::vec2(-0.44f, 0.18f));
 
+	//Hola 
+
 	/*positions.push_back(glm::vec2(0.0f, 0.5f));
 	positions.push_back(glm::vec2(-0.465f, 0.18f));
 	positions.push_back(glm::vec2(-0.0f, 0.18f));
