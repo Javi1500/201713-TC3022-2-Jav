@@ -216,7 +216,7 @@ void Initialize() {
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
+	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f)); 
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
 	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));

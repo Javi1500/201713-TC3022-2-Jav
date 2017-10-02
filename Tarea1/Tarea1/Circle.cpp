@@ -1,3 +1,8 @@
+/***************************
+Materia:Gráficas Computacionales Gráficas
+Fecha: 02/10/2017
+Autor: A01374356 Garcia Roque Javier Antonio
+*****************************/
 #include "Circle.h"
 /*Cuando el archivo fuente esta aquí va con comillas*/
 
