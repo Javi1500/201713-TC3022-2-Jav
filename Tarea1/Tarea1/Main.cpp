@@ -1,401 +1,160 @@
 /***************************
 Materia:Gráficas Computacionales Gráficas
-Fecha: 14/08/2017
+Fecha: 02/10/2017
 Autor: A01374356 Garcia Roque Javier Antonio
 *****************************/
-/*#include <iostream>
-#include "InputFile.h"
-int PerimetroRectangulo(int, int);
-float AreaTriangulo(float, float);
-int Mayor(int, int, int);
-int Menor(int, int, int);
-void FilaEstrellas(int);
-void MatrizEstrellas(int);
-void PiramideEstrellas(int);
-void FlechaEstrellas(int);
-void Fibonacci(int);
-bool EsPrimo(int);
-
-int main() {
-int x = PerimetroRectangulo(5, 3);
-std::cout << x << std::endl;
-float y = AreaTriangulo(5.0f, 3.0f);
-std::cout << y << std::endl;
-int mayor = Mayor(5, 9, 1);
-std::cout << mayor << std::endl;
-int menor = Menor(5, 9, 1);
-std::cout << menor << std::endl;
-FilaEstrellas(5);
-MatrizEstrellas(4);
-PiramideEstrellas(6);
-FlechaEstrellas(3);
-Fibonacci(9);
-bool primo = EsPrimo(52);
-std::cout << primo << std::endl;
-
-
-std::string filename = "Prueba.txt";
-InputFile myFile;
-myFile.Read(filename);
-std::string contents = myFile.GetContents();
-std::cout << "Contens: " << contents << std::endl;
-std::cin.get();
-return 0;
-}
-
-int PerimetroRectangulo(int base, int altura) {
-return (base * 2) + (altura * 2);
-}
-
-float AreaTriangulo(float base, float altura) {
-return (base*altura) / 2;
-}
-
-int Mayor(int numero1, int numero2, int numero3) {
-if (numero1 >= numero2 && numero1 >= numero3) {
-return numero1;
-}
-if (numero2 >= numero1 && numero2 >= numero3) {
-return numero2;
-}
-if (numero3 >= numero2 && numero3 >= numero1) {
-return numero3;
-}
-}
-
-int Menor(int numero1, int numero2, int numero3) {
-if (numero1 <= numero2 && numero1 <= numero3) {
-return numero1;
-}
-if (numero2 <= numero1 && numero2 <= numero3) {
-return numero2;
-}
-if (numero3 <= numero2 && numero3 <= numero1) {
-return numero3;
-}
-}
-
-void FilaEstrellas(int n) {
-for (int i = 0; i<n; i++) {
-std::cout << "*";
-}
-std::cout << "" << std::endl;
-}
-
-void MatrizEstrellas(int n) {
-int cont = 0;
-while (cont<n) {
-for (int i = 0; i<n; i++) {
-std::cout << "*";
-}
-std::cout << "" << std::endl;
-cont++;
-}
-}
-
-void PiramideEstrellas(int n) {
-int cont = n - 1;
-while (cont >= 0) {
-for (int i = 0; i<n - cont; i++) {
-std::cout << "*";
-}
-std::cout << "" << std::endl;
-cont--;
-}
-}
-
-void FlechaEstrellas(int n) {
-int cont = n - 1;
-while (cont >= 0) {
-for (int i = 0; i<n - cont; i++) {
-std::cout << "*";
-}
-std::cout << "" << std::endl;
-cont--;
-}
-cont = n - 1;
-while (cont>0) {
-for (int i = n - 1; i>0; i -= 1) {
-std::cout << "*";
-}
-std::cout << "" << std::endl;
-n--;
-cont--;
-}
-}
-
-void Fibonacci(int n) {
-int cont = 1;
-int a = 0;
-int b;
-for (int i = 0; i <= n; i++) {
-std::cout << cont;
-b = cont;
-cont = cont + a;
-a = b;
-}
-std::cout << "" << std::endl;
-}
-
-bool EsPrimo(int numero) {
-int aux = 0;
-for (int i = 1; i <= numero; i++) {
-if (numero%i == 0) {
-aux++;
-/*comprobar cuanto da el aux std::cout<<aux;*/
-/*	}
-}
-if (aux>2) {
-return false;
-}
-else {
-return true;
-}
-}*/
-
-#include <iostream>
-#include <GL/glew.h> /*Obtiene la ultima version de GL, va en <> pues se importa de fuera*/
+#include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <iostream>
+#include <glm/glm.hpp>
 #include <vector>
-#include <glm/glm.hpp> //Datos con dos o mas componentes 
-#include "InputFile.h"
+#include "Camera.h"
+#include "Mesh.h"
+#include "ShaderProgram.h"
+#include "Transform.h"
 
-
-//Identificador del manager al que vamos a asociar todos los VBO´s
-GLuint vao;
-
-//Identificador del manager de los shader (shaderProgram)
-GLuint shaderProgram;
-
-void Initialize() {
-	//Creando toda la memoria que el prograba va a utilizar
-
-	//Creacion del atributo de posiciones de los vertices
-	//Esta es una lista de vec2
-	//Esto es en el CPU
+Mesh _mesh;
+ShaderProgram _shaderProgram;
+Transform _transform; //Cada objeto tendra su propio transform por eso debemos crear mas de uno. ahorita solo uno pues solo hau un mesh que es pentagono
+Camera _camera;
+//ui
+void Initialize()
+{
+	
 	std::vector<glm::vec2> positions;
-	positions.push_back(glm::vec2(-0.6f, -0.8f));
-	positions.push_back(glm::vec2(-0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.6f, -0.8f));
-	positions.push_back(glm::vec2(0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.9f, 0.3f));
-	positions.push_back(glm::vec2(0.44f, 0.18f));
-	positions.push_back(glm::vec2(0.0f, 1.0f));
-	positions.push_back(glm::vec2(0.0f, 0.5f));
-	positions.push_back(glm::vec2(-0.9f, 0.3f));
-	positions.push_back(glm::vec2(-0.44f, 0.18f));
-	positions.push_back(glm::vec2(-0.6f, -0.8f));
-	positions.push_back(glm::vec2(-0.3f, -0.4f));
+	positions.push_back(glm::vec2(glm::cos(glm::radians(90.0f)), glm::sin(glm::radians(90.0f))));
+	positions.push_back(glm::vec2(0.5f * glm::cos(glm::radians(18.0f)), 0.5f * glm::sin(glm::radians(18.0f))));
+	positions.push_back(glm::vec2(glm::cos(glm::radians(18.0f)), glm::sin(glm::radians(18.0f))));
+	positions.push_back(glm::vec2(0.5f * glm::cos(glm::radians(306.0f)), 0.5f * glm::sin(glm::radians(306.0f))));
+	positions.push_back(glm::vec2(glm::cos(glm::radians(306.0f)), glm::sin(glm::radians(306.0f))));
+	positions.push_back(glm::vec2(0.5f * glm::cos(glm::radians(234.0f)), 0.5f * glm::sin(glm::radians(234.0f))));
+	positions.push_back(glm::vec2(glm::cos(glm::radians(234.0f)), glm::sin(glm::radians(234.0f))));
+	positions.push_back(glm::vec2(0.5f * glm::cos(glm::radians(162.0f)), 0.5f * glm::sin(glm::radians(162.0f))));
+	positions.push_back(glm::vec2(glm::cos(glm::radians(162.0f)), glm::sin(glm::radians(162.0f))));
+	positions.push_back(glm::vec2(0.5f * glm::cos(glm::radians(90.0f)), 0.5f * glm::sin(glm::radians(90.0f))));
+	positions.push_back(glm::vec2(glm::cos(glm::radians(90.0f)), glm::sin(glm::radians(90.0f))));
+	positions.push_back(glm::vec2(0.5f * glm::cos(glm::radians(18.0f)), 0.5f * glm::sin(glm::radians(18.0f))));
 
+	std::vector<glm::vec3> colors;
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	colors.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
 
-	/*positions.push_back(glm::vec2(0.0f, 0.5f));
-	positions.push_back(glm::vec2(-0.465f, 0.18f));
-	positions.push_back(glm::vec2(-0.0f, 0.18f));
-	positions.push_back(glm::vec2(0.0f, 0.5f));
-	positions.push_back(glm::vec2(0.465f, 0.18f));
-	positions.push_back(glm::vec2(0.0f, 0.18f));
-	positions.push_back(glm::vec2(0.3f, -0.4f));
-	positions.push_back(glm::vec2(-0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.0f, 0.18f));
-	positions.push_back(glm::vec2(0.465f, 0.18f));
-	positions.push_back(glm::vec2(0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.0f, 0.18f));
-	positions.push_back(glm::vec2(-0.465f, 0.18f));
-	positions.push_back(glm::vec2(-0.3f, -0.4f));
-	positions.push_back(glm::vec2(0.0f, 0.18f));*/
+	_mesh.CreateMesh(12);
+	_mesh.SetPositionAttribute(positions, GL_STATIC_DRAW, 0);
+	_mesh.SetColorAttribute(colors, GL_STATIC_DRAW, 1);
 
-	/*positions.push_back(glm::vec2(0.3f, 0.3f));
-	positions.push_back(glm::vec2(-0.3f, 0.30f));
-	positions.push_back(glm::vec2(0.3f, -0.3f));*/
-
-
-	//se crea la lista y se le da Nombre de la lista 
-	std::vector<glm::vec3> color;
-
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f)); 
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-	color.push_back(glm::vec3(1.0f, 1.0f, 1.0f));
-
-	/*color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));*/
-
-	/*color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
-	color.push_back(glm::vec3(0.0f, 0.0f, 1.0f));*/
-
-	//Queremos geenerar un manager 
-	glGenVertexArrays(1, &vao);
-	//Utilizar el vao. A parti de este momento, todos los vBO´s creados y configurados
-	glBindVertexArray(vao);
-
-	//Identificador del VBO de posiciones 
-	GLuint positionsVBO;
-	//Creacion del VBO de posiciones
-	glGenBuffers(1, &positionsVBO);//Cuantos y donde queremos almacenarlo
-	glBindBuffer(GL_ARRAY_BUFFER, positionsVBO);
-	//Creamos la memoria y la incializamos con los daos del atributo de posiciones
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2)*positions.size(), positions.data(), GL_STATIC_DRAW);
-	//Activamos este numero de atributo en la tarjeta de video.
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-	//Ya no vamos a utilizar VBO en este momento.
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	GLuint colorsVBO;
-	glGenBuffers(1, &colorsVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, colorsVBO);//Inicializamos el buffer con el atributo color
-											 //Madamos los datos a la tarjeta de video
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*color.size(), color.data(), GL_STATIC_DRAW);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-	glBindBuffer(GL_ARRAY_BUFFER, 0); //Le decimos que ya no quiero utilizarlo
-
-
-									  //Desactivamos el manager
-	glBindVertexArray(0);
-
-	//Creamos un objeto para leer archivos de texto
-	InputFile ifile;
-
-	//VERTEX SHADER
-	//Leemos el archivo default.vert donde esta el codigo del vertex shader
-	ifile.Read("Default.vert");
-	//obtenemos el codigo fuente y lo guardamos en un string 
-	std::string vertexSource = ifile.GetContents();
-	//Creamos un sahder de tipo vertex y guardamos su identificador en una variable.
-	GLuint vertexshaderHandle = glCreateShader(GL_VERTEX_SHADER);
-	//obtenmos los datos en el formato correcto.
-	const GLchar *vertexSource_c = (const GLchar*)vertexSource.c_str();
-	//Le estamos dando el codigo fuente a openGl para que se lo asigne a shader.
-	glShaderSource(vertexshaderHandle, 1, &vertexSource_c, nullptr);
-	//Compilamos el shader en busca de errores.
-	//vamos a asumir que no hay ningun error.
-	glCompileShader(vertexshaderHandle);
-
-	ifile.Read("Default.frag");
-	std::string fragmentSource = ifile.GetContents();
-	GLuint fragmentShaderHandle = glCreateShader(GL_FRAGMENT_SHADER);
-	const GLchar *fragmentSource_c = (const GLchar*)fragmentSource.c_str();
-	glShaderSource(fragmentShaderHandle, 1, &fragmentSource_c, nullptr);
-	glCompileShader(fragmentShaderHandle);
-
-	//Creamos el identificador para el manager de los shader.
-	shaderProgram = glCreateProgram();
-	//Adjuntamos el vertex shader al manager(van a trabajar juntos).
-	glAttachShader(shaderProgram, vertexshaderHandle);
-	//Adjuntamos el fragment shader al manager(van a trabajar juntos).
-	glAttachShader(shaderProgram, fragmentShaderHandle);
-	//Asociamos un buffer con indice 0 (posiciones) a la variabble VertexPosition
-	glBindAttribLocation(shaderProgram, 0, "VertexPosition");
-	//Asociamos un buffer con indice 1(colores) a la variable VertexColor
-	glBindAttribLocation(shaderProgram, 1, "VertexColor");
-	//Ejecutamos el proceso de linker (aseguramos que el vertex y fragment son compatibles)
-	glLinkProgram(shaderProgram);
-
+	_shaderProgram.CreateProgram();
+	_shaderProgram.AttachShader("Default.vert", GL_VERTEX_SHADER);
+	_shaderProgram.AttachShader("Default.frag", GL_FRAGMENT_SHADER);
+	_shaderProgram.SetAttribute(0, "VertexPosition");
+	_shaderProgram.SetAttribute(1, "VertexColor");
+	_shaderProgram.LinkProgram();
+	//Aqui cambiamos en z 90 grafos para que su arriba se mueva 90 grados, esto proboca que en las rotaciones globales gira sobre arriba predeterminado
+	//mientras que localguira sobre el arriba del mesh.
+	
+	//_transform.SetRotation(0.0f, 0.0f, 90.0f);
+	_camera.SetOrthographic(2.0f, 1.0f);
 }
 
-
-void GameLoop() {
-	//Limpiamos el buffer de color y el de profundidad. siempre hacerlo al inico del frame
+void GameLoop()
+{
+	// Limpiamos el buffer de color y el buffer de profunidad.
+	// Siempre hacerlo al inicio del frame
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//Activamos el vertex Shader y el fragment shader utilizando el manager
-	glUseProgram(shaderProgram);
+	_transform.Rotate(0.0f, 0.01f, 0.0f, false); //lo vamos a mover lo que diga aqui
 
-	//Activamos el manager y en este momento se activan todos los VBO´s asociados automaticamente
-	glBindVertexArray(vao);
-	//Funcion de dibujo sin indices 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 12);//Aqui dice que solo se dibujan 3 vertices
-										  //Terminamos de usar el manager
-	glBindVertexArray(0);
+	_shaderProgram.Activate();
+	_shaderProgram.SetUniformMatrix("mvpMatrix", _camera.GetViewProjection() * _transform.GetModelMatrix());//le enviamos la posicion con un get para que lo ocupe como quiera
+	_mesh.Draw(GL_TRIANGLE_STRIP);
+	_shaderProgram.Deactivate();
 
-	//Desactivamos el manager
-	glUseProgram(0);
-
-	//Warning.!!! Esto es openGL viejo. Solamente se utilizara esta clase.
-	//glBegin(GL_TRIANGLES);
-	///Rojo verde azul
-	/*glColor3f(1.0f, 0.0f, 0.0f);
-	//Vertices 2f=X y Y
-	glVertex2f(-1.0f, -1.0f);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex2f(1.0f, -1.0f);
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex2f(0.0f, 1.0f);*/
-
-	//glEnd();
-
-	//cuandot erminamos de renderear, cambiamos los buffers
+	// Cuando terminamos de renderear, cambiamos los buffers.
 	glutSwapBuffers();
 }
 
-int main(int argc, char* argv[]) {
-	/*std::cout << "Hello world" << std::endl;
-	Circle circulo(2.0, "green");
-	std::cout << circulo.GetRadius() << std::endl;
-	Rectangle rectangulo(2.0, 2.0);
-	std::cout << rectangulo.GetWidth() << std::endl;
-	std::cin.get();*/
+void Idle()
+{
+	// Cuando OpenGL entra en modo de reposo 
+	// (para guardar bateria, por ejemplo)
+	// le decimos que vuelva a dibujar ->
+	// Vuelve a mandar a llamar GameLoop
+	glutPostRedisplay();
+}
 
-	//Inicializar freeglut
-	//Freeglut se encarga de crear una ventana
-	//En donde podemos dibujar
+void ReshapeWindow(int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+int main(int argc, char* argv[])
+{
+	// Inicializar freeglut
+	// Freeglut se encarga de crear una ventana
+	// en donde podemos dibujar
 	glutInit(&argc, argv);
-	//Iniciar la versión especifica de openGL
-	//glutInitContextVersion(4,4);
-	//Iniciar el contexto de openGL. El contesto se refiere a las capacidades que tendra nuestra aplicacion grafica 
-	//En este caso estamos trabajando con el pipeline clasico
-	glutInitContextProfile(GLUT_CORE_PROFILE); //Abres la ventana para que sea compatible con el viejito gl
-											   //Freeglut nos permite configurar eventos que ocurren en la ventana.
-											   //Un evento que nos interesa es cuando alguien cierra la ventana. En este casi dejamos de renderear la escena y terminamos el programa.
+	// Solicitando una versión específica de OpenGL.
+	glutInitContextVersion(4, 0);
+	// Iniciar el contexto de OpenGL. El contexto se refiere
+	// a las capacidades que va a tener nuestra aplicación
+	// gráfica.
+	// En este caso estamos trabajando con el pipeline programable.
+	glutInitContextProfile(GLUT_CORE_PROFILE);
+	// Freeglut nos permite configurar eventos que ocurren en la ventana.
+	// Un evento que nos interesa es cuando alguien cierra la ventana.
+	// En este caso, simplemente dejamos de renderear la esscena y terminamos el programa.
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-	//Configuramos el framebuffer. En este caso estamos solicitando un buffer true color RGBA, un buffer de profundidad 
-	//Y un segundo buffer para renderear.
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-	//indicamos la dimension de nuestra pantalla en pixeles 
-	glutInitWindowSize(600, 600);
-	//Creamos la ventana y le damos un titulo
+	// Configuramos el framebuffer. En este caso estamos solicitando un buffer
+	// true color RGBA, un buffer de profundidad y un segundo buffer para renderear.
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+	// Iniciar las dimensiones de la ventana (en pixeles)
+	glutInitWindowSize(400, 400);
+	// Creamos la ventana y le damos un título.
 	glutCreateWindow("Hello World GL");
-
-	//Asociamos una funcion de render, la cual se manadara a llamar para dibujar un frame 
+	// Asociamos una función de render.
+	//Esta función se mandará a llamar para dibujar un frame.
 	glutDisplayFunc(GameLoop);
+	// Asociamos una función para el cambio de resolución
+	// de la ventana. Freeglut la va a mandar a llamar
+	// cuando alguien cambie el tamaño de la venta.
+	glutReshapeFunc(ReshapeWindow);
+	// Asociamos la función que se mandará a llamar
+	// cuando OpenGL entre en modo de reposo.
+	glutIdleFunc(Idle);
 
-	//Inicializamos GLEW. esta libreria se encarga de obtener el API de openGL de nuestra tarjeta de video. 
+	// Inicializar GLEW. Esta librería se encarga de obtener el API de OpenGL de
+	// nuestra tarjeta de video. SHAME ON YOU MICROSOFT.
 	glewInit();
 
-	//Configurar OpenGL.}
-	//Este es el color por default en el framebuffer (amarillo).
-	glClearColor(.0f, 1.0f, 0.0f, 0.0f);
+	// Configurar OpenGL. Este es el color por default del buffer de color
+	// en el framebuffer.
+	glClearColor(1.0f, 1.0f, 0.5f, 1.0f);
+	// Ademas de solicitar el buffer de profundidad, tenemos
+	// que decirle a OpenGL que lo queremos activo
+	glEnable(GL_DEPTH_TEST);
+	// Activamos el borrado de caras traseras.
+	// Ahora todos los triangulos que dibujemos deben estar en CCW
+	glEnable(GL_CULL_FACE);
+	// No dibujar las caras traseras de las geometrías.
+	glCullFace(GL_BACK);
 
 	std::cout << glGetString(GL_VERSION) << std::endl;
 
-	//configuracion incial de nujestro programa.
+	// Configuración inicial de nuestro programa.
 	Initialize();
 
-	//iniciada la aplicación el main se va a pausar en esta linea hasta que se cierre la ventana OpenGL.
+	// Iniciar la aplicación. El main se pausará en esta línea hasta que se cierre
+	// la venta de OpenGL.
 	glutMainLoop();
 
 	return 0;

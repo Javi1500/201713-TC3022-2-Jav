@@ -31,5 +31,5 @@ public:
 	void SetUniformf(std::string name, float x, float y);
 	void SetUniformf(std::string name, float x, float y, float z);
 	void SetUniformf(std::string name, float x, float y, float z, float w);
-
+	void SetUniformMatrix(std::string nage, glm::mat4 matrix);
 };
