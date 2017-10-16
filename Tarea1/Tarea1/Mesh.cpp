@@ -29,12 +29,11 @@ void Mesh::CreateMesh(GLint vertexCount) {
 
 void Mesh::Draw(GLenum primitive) {
 	glBindVertexArray(_vertexArrayObject);
-	if (_indicesCount == 0) {
-		glDrawArrays(primitive, 0, _vertexCount);
-	}
-	else {
+	if (_indicesCount > 0)
 		glDrawElements(primitive, _indicesCount, GL_UNSIGNED_INT, nullptr);
-	}
+	else
+		glDrawArrays(primitive, 0, _vertexCount);
+
 	glBindVertexArray(0);
 }
 
@@ -50,7 +49,7 @@ void Mesh::SetPositionAttribute(std::vector<glm::vec3> positions, GLenum usage, 
 		return;
 	}
 
-	SetAttributeData(_positionsVertexBufferObject, sizeof(glm::vec2) * positions.size(), positions.data(), usage, locationIndex, 3);
+	SetAttributeData(_positionsVertexBufferObject, sizeof(glm::vec3) * positions.size(), positions.data(), usage, locationIndex, 3);
 }
 void Mesh::SetColorAttribute(std::vector<glm::vec3> colors, GLenum usage, GLuint locationIndex) {
 	if (colors.size() == 0 || colors.size() != _vertexCount) {
