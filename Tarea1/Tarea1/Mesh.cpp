@@ -9,6 +9,7 @@ Mesh::Mesh() {
 	_vertexArrayObject = 0;
 	_positionsVertexBufferObject = 0;
 	_colorsVertexBufferObject = 0;
+	_normalVertexBufferObject = 0;
 	_vertexCount = 0;
 	_indicesBufferObject = 0;
 	_indicesCount = 0;
@@ -64,6 +65,16 @@ void Mesh::SetColorAttribute(std::vector<glm::vec4> colors, GLenum usage, GLuint
 	}
 
 	SetAttributeData(_colorsVertexBufferObject, sizeof(glm::vec3) * colors.size(), colors.data(), usage, locationIndex, 3);
+}
+
+void Mesh::SetNormalAttribute(std::vector<glm::vec3> normal, GLenum usage, GLuint locationIndex) {
+	if (normal.size() != 0 && normal.size() == int(_vertexCount)) {
+		for (size_t i = 0; i < normal.size(); i++)
+			normal[i].z *= -1;
+
+		SetAttributeData(_normalVertexBufferObject, sizeof(glm::vec3) * normal.size(),
+			normal.data(), usage, locationIndex, 3);
+	}
 }
 
 void Mesh::SetIndices(std::vector<unsigned int> indices, GLenum usage){
