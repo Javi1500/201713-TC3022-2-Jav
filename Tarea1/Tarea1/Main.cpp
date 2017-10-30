@@ -17,7 +17,7 @@ Mesh _mesh;
 ShaderProgram _shaderProgram;
 Transform _transform, _transform3;
 Camera _camera;
-float t,s;
+float t;
 
 void Initialize()
 {
@@ -154,22 +154,19 @@ void GameLoop()
 
 	_shaderProgram.Activate();
 
-	s += 0.01f;
-
+	t += 0.01f;
 	_shaderProgram.SetUniformf("iGlobalTime", t);
 	_transform3.SetPosition(0.0f, -8.0f, 0.0f);
 	_transform3.SetScale(25.0f, 1.0f, 25.0f);
 
-	_transform.SetRotation(0.0f, s, s);
-	glm::vec3 camPos = _camera.GetPosition();
-	_shaderProgram.SetUniformf("CameraPosition", camPos.x, camPos.y, -camPos.z);
+	_transform.SetRotation(0.0f, t, t);
+	glm::vec3 cam = _camera.GetPosition();
+	_shaderProgram.SetUniformf("CameraPosition", cam.x, cam.y, -cam.z);
 	_shaderProgram.SetUniformMatrix("mvpMatrix", _camera.GetViewProjection() * _transform3.GetModelMatrix());
 	_mesh.Draw(GL_TRIANGLES);
 	_shaderProgram.SetUniformMatrix("mvpMatrix", _camera.GetViewProjection() * _transform.GetModelMatrix());
 	_shaderProgram.SetUniformMatrix("ModelMatrix", _transform.GetModelMatrix());
 	_shaderProgram.SetUniformMatrix("nMatrix", glm::mat3(glm::transpose(glm::inverse(_transform.GetModelMatrix()))));
-
-
 	_mesh.Draw(GL_TRIANGLES);
 
 	_shaderProgram.Deactivate();
