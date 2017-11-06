@@ -10,17 +10,17 @@ Autor: A01374356 Garcia Roque Javier Antonio
 #include "Mesh.h"
 #include "ShaderProgram.h"
 #include "Camera.h"
-#include <IL/il.h>
 #include <iostream>
 #include <vector>
+#include <IL/il.h>
 #include "Texture2D.h"
 
 Mesh _mesh;
 ShaderProgram _shaderProgram;
-Transform _transform, _transform2, _transform3;
-Texture2D _shaderProgramTexture;
+Transform _transform, _transform3, _transform4;
 Camera _camera;
 float t;
+Texture2D myTexture;
 
 void Initialize()
 {
@@ -114,7 +114,7 @@ void Initialize()
 
 	//Para afuera 
 	std::vector<unsigned int> indices = { 0,2,3,3,1,0, 5,4,6,6,7,5, 8,10,11,11,9,8, 15,13,12,12,14,15, 18,19,17,17,16,18, 23,21,20,20, 22, 23 };
-	
+
 	//Crea el mesh
 	_mesh.CreateMesh(24);
 	_mesh.SetPositionAttribute(positions, GL_STATIC_DRAW, 0);
@@ -124,8 +124,8 @@ void Initialize()
 
 	_shaderProgram.CreateProgram();
 	_shaderProgram.Activate();
-	_shaderProgram.AttachShader("Samplers.vert", GL_VERTEX_SHADER);
-	_shaderProgram.AttachShader("Samplers.frag", GL_FRAGMENT_SHADER);
+	_shaderProgram.AttachShader("Transform.vert", GL_VERTEX_SHADER);
+	_shaderProgram.AttachShader("DeafultL.frag", GL_FRAGMENT_SHADER);
 	_shaderProgram.SetAttribute(0, "VertexPosition");
 	_shaderProgram.SetAttribute(1, "VertexColor");
 	_shaderProgram.SetAttribute(2, "VertexNormal");
@@ -133,14 +133,12 @@ void Initialize()
 	_shaderProgram.LinkProgram();
 	_shaderProgram.Deactivate();
 
-	_shaderProgramTexture.LoadTexture("1.jpg");
-	_shaderProgramTexture.LoadTexture("2.jpg");
-	_shaderProgramTexture.LoadTexture("3.jpg");
-
 	_shaderProgram.Activate();
 	_shaderProgram.SetUniformf("iResolution", 400.0f, 400.0f);
 	_shaderProgram.SetUniformf("lightPosition", 1.5f, 4.0f, 8.0f);
 	_shaderProgram.SetUniformf("lightColor", 1.0f, 1.0f, 1.0f);
+
+	myTexture.LoadTexture("1.jpg");
 
 	_shaderProgram.Deactivate();
 
@@ -148,7 +146,8 @@ void Initialize()
 	_camera.MoveForward(20.0f, true);
 }
 
-void Idle(){
+void Idle()
+{
 	glutPostRedisplay();
 }
 
@@ -163,17 +162,24 @@ void GameLoop()
 	_transform3.SetPosition(0.0f, -8.0f, 0.0f);
 	_transform3.SetScale(25.0f, 1.0f, 25.0f);
 
-
 	glActiveTexture(GL_TEXTURE0);
-	_shaderProgramTexture.Unbind();
+	myTexture.Bind();
 
-	glActiveTexture(GL_TEXTURE1);
-	_shaderProgramTexture.Unbind();
-
-	_shaderProgram.SetUniformMatrix("mvpMatrix", _camera.GetViewProjection() * _transform.GetModelMatrix());
+	_transform4.SetRotation(0.0f, t, t);
+	glm::vec3 camPos = _camera.GetPosition();
+	_shaderProgram.SetUniformf("CameraPosition", camPos.x, camPos.y, -camPos.z);
+	_shaderProgram.SetUniformMatrix("mvpMatrix", _camera.GetViewProjection() * _transform3.GetModelMatrix());
+	_mesh.Draw(GL_TRIANGLES);
+	_shaderProgram.SetUniformMatrix("mvpMatrix", _camera.GetViewProjection() * _transform4.GetModelMatrix());
 	_shaderProgram.SetUniformMatrix("ModelMatrix", _transform.GetModelMatrix());
 	_shaderProgram.SetUniformMatrix("nMatrix", glm::mat3(glm::transpose(glm::inverse(_transform.GetModelMatrix()))));
+	_shaderProgram.SetUniformf("DiffuseTexture", 0);
+
+	//TEXTURAS
+
 	_mesh.Draw(GL_TRIANGLES);
+	glActiveTexture(GL_TEXTURE0);
+	myTexture.Unbind();
 
 	_shaderProgram.Deactivate();
 
@@ -206,16 +212,15 @@ int main(int argc, char* argv[])
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 
-	// Inicializar DevIL. Esto se debe hacer sólo una vez.
+
+	// Inicializar DevIL
 	ilInit();
-	// Cambiar el punto de origen de las texturas. Por default, DevIL
-	// pone un punto de origen en la esquina superior izquierda.
-	// Esto es compatible con el sistema operativo, pero no con el
-	// funcionamiento de OpenGL.
+	// Le decimos que queremos cambiar el punto de origen
 	ilEnable(IL_ORIGIN_SET);
-	// Configurar el punto de origen de las texturas en la esquina
-	// inferior izquierda
+	// Configuramos el origen de las texturas cargadas por
+	// DevIL como abajo a la izquierda
 	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+
 
 	Initialize();
 

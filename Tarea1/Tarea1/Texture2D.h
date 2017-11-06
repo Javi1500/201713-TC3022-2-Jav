@@ -10,11 +10,11 @@ public:
 	Texture2D();
 	~Texture2D();
 
-	void LoadTexture(std::string path);
-	void LoadTexture(GLint format, GLsizei width, GLsizei height, const void* pixels);
-
 	void Bind();
 	void Unbind();
+
+	void LoadTexture(std::string path);
+	void LoadTexture(GLint format, GLsizei width, GLsizei height, const void* pixels);
 private:
 	GLuint _textureId;
 };
