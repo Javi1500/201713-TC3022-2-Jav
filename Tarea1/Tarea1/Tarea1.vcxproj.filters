@@ -48,6 +48,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -80,6 +83,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Prueba.txt" />
@@ -103,5 +109,22 @@
     <None Include="Transform.vert">
       <Filter>Archivos de código fuente\Shaders</Filter>
     </None>
+    <None Include="Samplers.frag">
+      <Filter>Archivos de código fuente\Shaders</Filter>
+    </None>
+    <None Include="Samplers.vert">
+      <Filter>Archivos de código fuente\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\..\3.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\..\2.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\..\1.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
   </ItemGroup>
 </Project>
